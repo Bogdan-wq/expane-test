@@ -2,10 +2,11 @@ import React from 'react';
 import User from "../types/User";
 
 interface UserTableInterface {
-    users:User[]
+    users:User[],
+    setClientToEdit:(user : User) => void;
 }
 
-const UserTable = ({ users } : UserTableInterface) => {
+const UserTable = ({ users,setClientToEdit } : UserTableInterface) => {
     return (
         <table className="table-fixed w-full">
              <thead>
@@ -29,6 +30,12 @@ const UserTable = ({ users } : UserTableInterface) => {
              </thead>
             <tbody>
             {users.map(user => {
+
+                const handleSetUserToEdit = () => {
+                    setClientToEdit(user)
+                }
+
+
                 return (
                     <tr key={user.id}>
                         <td className="w-1/5 py-3 border-b border-gray-200 bg-white text-sm text-gray-90 whitespace-no-wrap text-center">
@@ -46,7 +53,7 @@ const UserTable = ({ users } : UserTableInterface) => {
                                  src={user.avatarUrl}/>
                         </td>
                         <td className="w-1/5 py-3 border-b border-gray-200 bg-white text-sm text-center">
-                            <button className="bg-green-500 text-white py-1 px-5 rounded">
+                            <button className="bg-green-500 text-white py-1 px-5 rounded" onClick={handleSetUserToEdit}>
                                 Edit
                             </button>
                         </td>

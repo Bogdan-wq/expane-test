@@ -1,6 +1,8 @@
+import { gql,request } from "graphql-request";
 import User from "../types/User";
+import api from "../constants/api";
 
-const query = `
+const query = gql`
     query {
         getClients {
             firstName
@@ -13,12 +15,10 @@ const query = `
 `
 
 const getClients  = () : Promise<User[]> => {
-    return fetch('https://test-task.expane.pro/api/graphql',{
-        method:'POST',
-        body:JSON.stringify({ query })
-    })
-        .then(res => res.json())
-        .then(res => res.data.getClients)
+    return request(api,query)
+        .then(data => {
+            return data.getClients
+        })
 }
 
 export default getClients;
