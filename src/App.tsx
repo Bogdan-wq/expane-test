@@ -7,11 +7,13 @@ import User from "./types/User";
 import UserTable from "./components/UserTable";
 import AddClientModal from "./components/AddClientModal";
 import EditClientModal from "./components/EditClientModal";
+import Loading from "./components/UI/Loading";
+import Error from "./components/UI/Error";
 
 
 const App = () => {
 
-  const { data,isLoading } = useQuery<User[],{}>('users',getClients);
+  const { data,isLoading,isError } = useQuery<User[],{}>('users',getClients);
   const [addModal,setAddModal] = useState<boolean>(false);
   const [clientToEdit,setClientToEdit] = useState<User | null>(null)
 
@@ -27,7 +29,7 @@ const App = () => {
   return (
       <div className="h-screen flex justify-center pt-20">
           <div className="container mx-auto">
-              {isLoading && <div>Loading...</div>}
+              {isLoading && <Loading />}
               {data && (
                   <>
                       <div className="flex justify-end mb-2">
@@ -47,6 +49,7 @@ const App = () => {
                           toggle={handleResetClientToEdit}/>
                   </>
                )}
+              {isError && <Error />}
           </div>
       </div>
   );

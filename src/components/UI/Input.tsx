@@ -7,6 +7,7 @@ interface InputProps {
     ref?:any,
     error?:boolean,
     helperText?:string,
+    autoComplete?:string,
 }
 
 const Input = React.forwardRef(
@@ -27,7 +28,8 @@ const Input = React.forwardRef(
 Input.defaultProps = {
     error:false,
     helperText:'',
-    className:''
+    className:'',
+    autoComplete:'off',
 }
 
 export default Input;

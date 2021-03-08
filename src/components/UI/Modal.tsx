@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 
 interface ModalProps {
     open:boolean,
@@ -16,20 +16,29 @@ const Modal = ({
 } : React.PropsWithChildren<ModalProps>) => {
 
 
+    const [canShow,setCanShow] = useState(false)
+
     useEffect(() => {
         if(open) {
             onMount()
         } else {
             onUnmount()
         }
+        setTimeout(() => {
+            setCanShow(s => !s)
+        },10)
     },[open])
+
+    const display = !canShow ? {} : {style:{display:'none'}}
 
     if(open) {
         return (
-            <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="fixed z-10 inset-0 overflow-y-auto" {...display}>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-                        <div className="absolute inset-0 bg-gray-500 opacity-75" onClick={toggle}></div>
+                        <div className="absolute inset-0 bg-gray-500 opacity-75" onClick={toggle}>
+
+                        </div>
                     </div>
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen"
                           aria-hidden="true">&#8203;</span>

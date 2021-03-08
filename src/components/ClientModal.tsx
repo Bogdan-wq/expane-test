@@ -2,6 +2,7 @@ import React from 'react';
 import { FieldErrors } from "react-hook-form";
 import Input from "./UI/Input";
 import Modal from "./UI/Modal";
+import Loading from "./UI/Loading";
 
 interface ClientModalProps {
     open:boolean,
@@ -78,15 +79,15 @@ const ClientModal = (props : ClientModalProps) => {
                     placeholder="Your phone"
                     name="phone"/>
                 <div className="mt-4">
-                    <input onChange={handleAvatar} type="file" id="avatar" className="w-0" />
+                    <input onChange={handleAvatar} type="file" id="avatar" className="w-0" disabled={loading} />
                     <label htmlFor="avatar" className="bg-green-500 text-white py-1 px-5 rounded cursor-pointer">
                         Upload Avatar
                     </label>
                     {avatar ? <span className="text-sm inline-block ml-2 w-28 truncate">{avatar?.name}</span> : null}
                 </div>
-                {loading && <div>Loading...</div>}
+                {loading && <Loading className="mt-3"/>}
                 <div className="flex justify-end mt-2">
-                    <button className="bg-blue-500 text-white py-1 px-5 rounded" type="submit">
+                    <button className="bg-blue-500 text-white py-1 px-5 rounded" type="submit" disabled={loading}>
                         {submitButtonLabel}
                     </button>
                 </div>
