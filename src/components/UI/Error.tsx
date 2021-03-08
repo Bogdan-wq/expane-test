@@ -7,7 +7,7 @@ interface ErrorProps {
 
 const Error = ({ className,label} : ErrorProps) => {
     return (
-        <div className={`${className} flex flex-center text-red-500 text-xl`}>
+        <div className={`${className} flex flex-center text-red-600 text-xl`}>
             {label}
         </div>
     )
